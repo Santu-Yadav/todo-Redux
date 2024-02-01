@@ -16,6 +16,7 @@ const RenderList = ({
   editTask,
 }) => {
   const todos = useSelector((state) => state.todos);
+  console.log("Todos @", todos);
   const handleChangeEdit = (receivedItem, e) => {
     console.log("received Item @@", receivedItem);
     console.log("received event @@", e);
@@ -83,7 +84,7 @@ const RenderList = ({
               <div>
                 <div className="selectWrapper">
                   <select
-                    value={item.color}
+                    // value={item.color}
                     onChange={(event) => selectedColorChange(event, item)}
                     className="selectClass"
                     style={{ color: item.color }}

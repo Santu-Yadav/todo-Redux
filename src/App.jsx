@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { add, remove } from "./ReduxStore/slices/firstSlice";
+import { add, remove, colorChange } from "./ReduxStore/slices/firstSlice";
 
 import MainBody from "./mainBody";
 import Footer from "./footer";
@@ -20,8 +20,6 @@ function App() {
 
   const handleChange = (e) => {
     const uniqueIdentifier = `${Date.now()}_${Math.random()}`;
-    // console.log(uniqueIdentifier);
-    // console.log("input #", e.target.value);
     setInput({
       id: uniqueIdentifier,
       value: e.target.value,
@@ -40,17 +38,23 @@ function App() {
     dispatch(remove(data));
   };
 
+  const selectedColorChange = (event, item) => {
+    const value = event.target.value;
+    const id = item.id;
+    dispatch(colorChange({ value, id }));
+  };
+
+  const handleMarkAllCompleted = () => {
+    const arr2 = dataArray.map((item) => item.id);
+    setCheckedIds(arr2);
+  };
+
   const handleClearCompleted = () => {
     const remaningData = dataArray.filter(
       (item) => !checkedIds.includes(item.id)
     );
 
     setDataArray(remaningData);
-  };
-
-  const handleMarkAllCompleted = () => {
-    const arr2 = dataArray.map((item) => item.id);
-    setCheckedIds(arr2);
   };
 
   const handleCheckboxChange = (event) => {
@@ -60,16 +64,6 @@ function App() {
       event.target.checked
         ? [...prevIds, selectedId]
         : prevIds.filter((id) => id !== selectedId)
-    );
-  };
-
-  const selectedColorChange = (event, item) => {
-    setDataArray(
-      dataArray.map((element) =>
-        element.id === item.id
-          ? { ...element, color: event.target.value }
-          : { ...element }
-      )
     );
   };
 
