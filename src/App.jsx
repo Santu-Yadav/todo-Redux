@@ -5,6 +5,7 @@ import {
   remove,
   colorChange,
   taskCompletedBoxChecked,
+  markAllCompleted,
 } from "./ReduxStore/slices/firstSlice";
 
 import MainBody from "./mainBody";
@@ -51,8 +52,7 @@ function App() {
   };
 
   const handleMarkAllCompleted = () => {
-    const arr2 = dataArray.map((item) => item.id);
-    setCheckedIds(arr2);
+    dispatch(markAllCompleted());
   };
 
   const handleClearCompleted = () => {
@@ -83,7 +83,6 @@ function App() {
 
   const editTask = (item) => {
     console.log("editTask icon onClick #", item);
-    //******************************************************* */
 
     setDataArray(
       dataArray.map((element) =>
