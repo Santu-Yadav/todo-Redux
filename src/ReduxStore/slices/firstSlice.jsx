@@ -38,6 +38,10 @@ export const firstTodoSlice = createSlice({
         return { ...element, completed: true };
       });
     },
+
+    clearCompleted: (state) => {
+      return state.filter((element) => element.completed === false);
+    },
   },
 });
 
@@ -47,6 +51,7 @@ export const {
   colorChange,
   taskCompletedBoxChecked,
   markAllCompleted,
+  clearCompleted,
 } = firstTodoSlice.actions;
 
 export default firstTodoSlice.reducer;

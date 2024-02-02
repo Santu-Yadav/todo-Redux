@@ -6,6 +6,7 @@ import {
   colorChange,
   taskCompletedBoxChecked,
   markAllCompleted,
+  clearCompleted,
 } from "./ReduxStore/slices/firstSlice";
 
 import MainBody from "./mainBody";
@@ -56,11 +57,11 @@ function App() {
   };
 
   const handleClearCompleted = () => {
-    const remaningData = dataArray.filter(
-      (item) => !checkedIds.includes(item.id)
-    );
-
-    setDataArray(remaningData);
+    // const remaningData = dataArray.filter(
+    //   (item) => !checkedIds.includes(item.id)
+    // );
+    // setDataArray(remaningData);
+    dispatch(clearCompleted());
   };
 
   const handleCheckboxChange = (event) => {
