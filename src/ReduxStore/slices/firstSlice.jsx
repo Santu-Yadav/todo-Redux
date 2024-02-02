@@ -20,9 +20,26 @@ export const firstTodoSlice = createSlice({
           : { ...element }
       );
     },
+
+    // element.id === selectedId
+    //   ? { ...element, completed: true }
+    //   : { ...element, completed: false }
+
+    taskCompletedBoxChecked: (state, action) => {
+      console.log("taskCompletedBoxChecked @@", action);
+
+      return state.map((element) => {
+        return element.id === action.payload.selectedId
+          ? action.payload.isChecked
+            ? { ...element, completed: true }
+            : { ...element, completed: false }
+          : { ...element };
+      });
+    },
   },
 });
 
-export const { add, remove, colorChange } = firstTodoSlice.actions;
+export const { add, remove, colorChange, taskCompletedBoxChecked } =
+  firstTodoSlice.actions;
 
 export default firstTodoSlice.reducer;

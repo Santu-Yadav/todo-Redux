@@ -76,7 +76,7 @@ const RenderList = ({
                   id={item.id}
                   type="checkbox"
                   onChange={handleCheckboxChange}
-                  checked={checkedIds.includes(item.id)}
+                  checked={item.completed}
                 />
                 <span className="checkMark"></span>
               </label>

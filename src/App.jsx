@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { add, remove, colorChange } from "./ReduxStore/slices/firstSlice";
+import {
+  add,
+  remove,
+  colorChange,
+  taskCompletedBoxChecked,
+} from "./ReduxStore/slices/firstSlice";
 
 import MainBody from "./mainBody";
 import Footer from "./footer";
@@ -25,6 +30,7 @@ function App() {
       value: e.target.value,
       color: "no color",
       editIndicator: false,
+      completed: false,
     });
   };
 
@@ -59,12 +65,9 @@ function App() {
 
   const handleCheckboxChange = (event) => {
     const selectedId = event.target.id;
+    const isChecked = event.target.checked;
 
-    setCheckedIds((prevIds) =>
-      event.target.checked
-        ? [...prevIds, selectedId]
-        : prevIds.filter((id) => id !== selectedId)
-    );
+    dispatch(taskCompletedBoxChecked({ selectedId, isChecked }));
   };
 
   const boxSelected = (e) => {
