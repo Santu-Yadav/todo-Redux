@@ -16,6 +16,8 @@ const RenderList = ({
   editTask,
 }) => {
   const todos = useSelector((state) => state.todos);
+  const taskCompleted = useSelector((state) => state.filter);
+
   console.log("Todos @", todos);
   const handleChangeEdit = (receivedItem, e) => {
     console.log("received Item @@", receivedItem);
@@ -52,9 +54,9 @@ const RenderList = ({
         )
           return;
 
-        if (filterByStatus === "completed" && !item.completed) return;
+        if (taskCompleted.filterState === "completed" && !item.completed) return;
 
-        if (filterByStatus === "active" && item.completed) return;
+        if (taskCompleted.filterState === "active" && item.completed) return;
 
         if (item.editIndicator) {
           return (

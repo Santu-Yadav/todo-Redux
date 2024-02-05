@@ -16,11 +16,13 @@ import "./app.css";
 
 function App() {
   const [input, setInput] = useState({});
+  const [filterByStatus, setFilterByStatus] = useState("all");
+
+  //****************************************************************
   const [dataArray, setDataArray] = useState([]);
   const [checkedIds, setCheckedIds] = useState([]);
-  const [filterByStatus, setFilterByStatus] = useState("all");
-  const [selectedColorBoxArray, setSelectedColorBoxArray] = useState([]);
 
+  const [selectedColorBoxArray, setSelectedColorBoxArray] = useState([]);
   //*************************************************** */
   const dispatch = useDispatch();
   //***************************************************
@@ -57,10 +59,6 @@ function App() {
   };
 
   const handleClearCompleted = () => {
-    // const remaningData = dataArray.filter(
-    //   (item) => !checkedIds.includes(item.id)
-    // );
-    // setDataArray(remaningData);
     dispatch(clearCompleted());
   };
 
