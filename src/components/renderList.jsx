@@ -52,10 +52,9 @@ const RenderList = ({
         )
           return;
 
-        if (filterByStatus === "completed" && !checkedIds.includes(item.id))
-          return;
+        if (filterByStatus === "completed" && !item.completed) return;
 
-        if (filterByStatus === "active" && checkedIds.includes(item.id)) return;
+        if (filterByStatus === "active" && item.completed) return;
 
         if (item.editIndicator) {
           return (
@@ -84,7 +83,7 @@ const RenderList = ({
               <div>
                 <div className="selectWrapper">
                   <select
-                    // value={item.color}
+                    value={item.color}
                     onChange={(event) => selectedColorChange(event, item)}
                     className="selectClass"
                     style={{ color: item.color }}
