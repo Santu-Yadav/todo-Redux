@@ -1,12 +1,10 @@
 import { useDispatch } from "react-redux";
 import { filterByState } from "../ReduxStore/slices/secondSlice";
 
-const RadioInputGroup = ({ labelName, inputValue, setFilterByStatus }) => {
+const RadioInputGroup = ({ labelName, inputValue }) => {
   const dispatch = useDispatch();
 
   const onValueChangeRadio = (e) => {
-    // console.log("footer - radio button", e);
-    // setFilterByStatus(e.target.value);
     dispatch(filterByState(e.target.value));
   };
   return (

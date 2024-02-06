@@ -1,3 +1,14 @@
+/* 
+Date: 5th-Feb-2024
+
+Blocker: After clearing filterByStatus useState, dasboard stops displaying values. Have a look
+next time. -- 
+**************************************************************************
+Date: 6th-Feb-2024 : above problem is fixed.
+Problem: working on filterByColor in reduxStore/secondSlice.
+**************************************************************************
+
+*/
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import {
@@ -16,16 +27,8 @@ import "./app.css";
 
 function App() {
   const [input, setInput] = useState({});
-  const [filterByStatus, setFilterByStatus] = useState("all");
 
-  //****************************************************************
-  const [dataArray, setDataArray] = useState([]);
-  const [checkedIds, setCheckedIds] = useState([]);
-
-  const [selectedColorBoxArray, setSelectedColorBoxArray] = useState([]);
-  //*************************************************** */
   const dispatch = useDispatch();
-  //***************************************************
 
   const handleChange = (e) => {
     const uniqueIdentifier = `${Date.now()}_${Math.random()}`;
@@ -65,31 +68,11 @@ function App() {
   const handleCheckboxChange = (event) => {
     const selectedId = event.target.id;
     const isChecked = event.target.checked;
-
     dispatch(taskCompletedBoxChecked({ selectedId, isChecked }));
-  };
-
-  const boxSelected = (e) => {
-    console.log("Green box selected", e);
-
-    setSelectedColorBoxArray((prev) =>
-      e.target.checked
-        ? [...prev, e.target.value]
-        : prev.filter((item) => item !== e.target.value)
-    );
-    console.log("selectedColorBoxArray", selectedColorBoxArray);
   };
 
   const editTask = (item) => {
     console.log("editTask icon onClick #", item);
-
-    setDataArray(
-      dataArray.map((element) =>
-        element.id === item.id
-          ? { ...element, editIndicator: true }
-          : { ...element }
-      )
-    );
   };
 
   return (
@@ -99,27 +82,18 @@ function App() {
         <p className="body-p">Todos</p>
         <div className="body-dashboard">
           <MainBody
-            dataArray={dataArray}
-            setDataArray={setDataArray}
             handleDelete={handleDelete}
             handleCheckboxChange={handleCheckboxChange}
-            checkedIds={checkedIds}
             selectedColorChange={selectedColorChange}
-            selectedColorBoxArray={selectedColorBoxArray}
             handleClick={handleClick}
             handleChange={handleChange}
             input={input}
-            filterByStatus={filterByStatus}
             editTask={editTask}
           />
 
           <Footer
-            boxSelected={boxSelected}
             handleMarkAllCompleted={handleMarkAllCompleted}
             handleClearCompleted={handleClearCompleted}
-            setFilterByStatus={setFilterByStatus}
-            dataArray={dataArray}
-            checkedIds={checkedIds}
           />
         </div>
       </div>

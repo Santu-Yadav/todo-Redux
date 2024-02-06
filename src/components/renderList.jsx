@@ -5,58 +5,30 @@ import InputUser from "./inputUser";
 import { useSelector } from "react-redux";
 
 const RenderList = ({
-  dataArray,
-  setDataArray,
   handleDelete,
   handleCheckboxChange,
-  checkedIds,
   selectedColorChange,
-  selectedColorBoxArray,
-  filterByStatus,
   editTask,
 }) => {
   const todos = useSelector((state) => state.todos);
   const taskCompleted = useSelector((state) => state.filter);
 
-  console.log("Todos @", todos);
+  // console.log("Todos @", todos);
   const handleChangeEdit = (receivedItem, e) => {
     console.log("received Item @@", receivedItem);
     console.log("received event @@", e);
-    setDataArray(
-      dataArray.map((element) =>
-        element.id === receivedItem.id
-          ? {
-              ...element,
-              value: e.target.value,
-            }
-          : { ...element }
-      )
-    );
+
     // const editItem = { ...receivedItem };
   };
 
-  const handleClickEdit = (receivedItem) => {
-    setDataArray(
-      dataArray.map((element) =>
-        element.id === receivedItem.id
-          ? { ...element, editIndicator: false }
-          : { ...element }
-      )
-    );
-  };
+  const handleClickEdit = (receivedItem) => {};
 
   return (
     <div>
       {todos.map((item) => {
-        if (
-          selectedColorBoxArray.length !== 0 &&
-          !selectedColorBoxArray.includes(item.color)
-        )
-          return;
+        if (taskCompleted.filterState === "completed" && item.completed) return;
 
-        if (taskCompleted.filterState === "completed" && !item.completed) return;
-
-        if (taskCompleted.filterState === "active" && item.completed) return;
+        if (taskCompleted.filterState === "active" && !item.completed) return;
 
         if (item.editIndicator) {
           return (

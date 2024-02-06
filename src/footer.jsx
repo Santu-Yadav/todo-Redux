@@ -1,14 +1,7 @@
 import FilterByColor from "./components/filterByColor";
 import RadioInputGroup from "./components/radioInputGroup";
 
-const Footer = ({
-  boxSelected,
-  handleMarkAllCompleted,
-  handleClearCompleted,
-  setFilterByStatus,
-  dataArray,
-  checkedIds,
-}) => {
+const Footer = ({ handleMarkAllCompleted, handleClearCompleted }) => {
   return (
     <div className="footer">
       <div className="box">
@@ -23,7 +16,6 @@ const Footer = ({
       <div className="box2">
         <span>Remaining Todos</span>
         {/* calculation of remaining todo  */}
-        {dataArray.length - checkedIds.length}
       </div>
       <div className="box3">
         <span>Filter by Status</span>
@@ -37,14 +29,13 @@ const Footer = ({
             <RadioInputGroup
               labelName={item.labelName}
               inputValue={item.value}
-              setFilterByStatus={setFilterByStatus}
             />
           );
         })}
       </div>
       <div className="box4">
         <span>Filter by Color</span>
-        <FilterByColor boxSelected={boxSelected} />
+        <FilterByColor />
       </div>
     </div>
   );

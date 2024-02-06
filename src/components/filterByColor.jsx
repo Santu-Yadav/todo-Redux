@@ -1,3 +1,6 @@
+import { useDispatch } from "react-redux";
+import { filterByColor } from "../ReduxStore/slices/secondSlice";
+
 import "./filterByColor.css";
 
 const filterByColorData = [
@@ -23,7 +26,16 @@ const filterByColorData = [
   },
 ];
 
-const FilterByColor = ({ boxSelected }) => {
+const FilterByColor = () => {
+  const dispatch = useDispatch();
+
+  const boxSelected = (e) => {
+    const value = e.target.value;
+    const checkedIndicator = e.target.checked;
+
+    console.log("filter By Color @@", e);
+    dispatch(filterByColor({ value, checkedIndicator }));
+  };
   return (
     <div className="container-filter">
       {filterByColorData.map((item) => (
