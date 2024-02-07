@@ -10,8 +10,25 @@ export const secondSlice = createSlice({
     },
 
     filterByColor: (state, action) => {
-      return {...state, filterColor: state.filterColor.push()}
+      if (action.payload.checkedIndicator) {
+        return {
+          ...state,
+          filterColor: [...state.filterColor, action.payload.value],
+        };
+      } else {
+        return {
+          ...state,
+          filterColor: state.filterColor.filter(
+            (item) => item !== action.payload.value
+          ),
+        };
+      }
     },
+
+    // return {
+    //   ...state,
+    //   filterColor: [...state.filterColor, action.payload.value],
+    // };
   },
 });
 

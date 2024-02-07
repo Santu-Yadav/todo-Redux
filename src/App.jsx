@@ -7,7 +7,6 @@ next time. --
 Date: 6th-Feb-2024 : above problem is fixed.
 Problem: working on filterByColor in reduxStore/secondSlice.
 **************************************************************************
-
 */
 import { useState } from "react";
 import { useDispatch } from "react-redux";

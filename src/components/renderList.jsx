@@ -30,6 +30,12 @@ const RenderList = ({
 
         if (taskCompleted.filterState === "active" && !item.completed) return;
 
+        if (
+          !taskCompleted.filterColor.includes(item.color) &&
+          taskCompleted.filterColor.length !== 0
+        )
+          return;
+
         if (item.editIndicator) {
           return (
             <InputUser
