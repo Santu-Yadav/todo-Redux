@@ -2,7 +2,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import InputUser from "./inputUser";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+// import { editValueLater } from "./ReduxStore/slices/firstSlice";
+import {
+  editValueLater,
+  changeEditIndicator,
+} from "../ReduxStore/slices/firstSlice";
 
 const RenderList = ({
   handleDelete,
@@ -13,15 +19,17 @@ const RenderList = ({
   const todos = useSelector((state) => state.todos);
   const taskCompleted = useSelector((state) => state.filter);
 
-  // console.log("Todos @", todos);
-  const handleChangeEdit = (receivedItem, e) => {
-    console.log("received Item @@", receivedItem);
-    console.log("received event @@", e);
+  const dispatch = useDispatch();
 
-    // const editItem = { ...receivedItem };
+  console.log("Todos @", todos);
+  const handleChangeEdit = (receivedItem, e) => {
+    const changedValue = e.target.value;
+    dispatch(editValueLater({ receivedItem, changedValue }));
   };
 
-  const handleClickEdit = (receivedItem) => {};
+  const handleClickEdit = (receivedItem) => {
+    dispatch(changeEditIndicator(receivedItem.id));
+  };
 
   return (
     <div>

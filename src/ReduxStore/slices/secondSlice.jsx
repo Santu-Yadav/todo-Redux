@@ -24,11 +24,6 @@ export const secondSlice = createSlice({
         };
       }
     },
-
-    // return {
-    //   ...state,
-    //   filterColor: [...state.filterColor, action.payload.value],
-    // };
   },
 });
 

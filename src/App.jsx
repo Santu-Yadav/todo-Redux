@@ -7,6 +7,8 @@ next time. --
 Date: 6th-Feb-2024 : above problem is fixed.
 Problem: working on filterByColor in reduxStore/secondSlice.
 **************************************************************************
+Date: 7th-Feb-2024 : above feature is done.
+**************************************************************************
 */
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -17,6 +19,7 @@ import {
   taskCompletedBoxChecked,
   markAllCompleted,
   clearCompleted,
+  changeEditIndicator,
 } from "./ReduxStore/slices/firstSlice";
 
 import MainBody from "./mainBody";
@@ -71,7 +74,8 @@ function App() {
   };
 
   const editTask = (item) => {
-    console.log("editTask icon onClick #", item);
+    // console.log("editTask icon clicked #", item);
+    dispatch(changeEditIndicator(item.id));
   };
 
   return (

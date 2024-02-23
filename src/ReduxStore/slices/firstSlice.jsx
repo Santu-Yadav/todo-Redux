@@ -43,7 +43,23 @@ export const firstTodoSlice = createSlice({
       return state.filter((element) => element.completed === false);
     },
 
-    
+    changeEditIndicator: (state, action) => {
+      console.log("changeEditIndicator @@", action.payload);
+      return state.map((element) => {
+        return element.id === action.payload
+          ? { ...element, editIndicator: !element.editIndicator }
+          : { ...element };
+      });
+    },
+
+    editValueLater: (state, action) => {
+      // console.log("##### @@@@", action.payload.receivedItem);
+      return state.map((element) => {
+        return element.id === action.payload.receivedItem.id
+          ? { ...element, value: action.payload.changedValue }
+          : { ...element };
+      });
+    },
   },
 });
 
@@ -54,7 +70,8 @@ export const {
   taskCompletedBoxChecked,
   markAllCompleted,
   clearCompleted,
- 
+  changeEditIndicator,
+  editValueLater,
 } = firstTodoSlice.actions;
 
 export default firstTodoSlice.reducer;
